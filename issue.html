@@ -1,8 +1,14 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <title>Library Management System</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <style>
         nav {
             background-color: rgb(0, 255, 76);
@@ -54,6 +60,15 @@
             margin-right: 10px;
             bottom: 10px;
             width: 100%;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s linear 0.3s, opacity 0.3s;
+        }
+        
+        .show-footer {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
         }
         
         section {
@@ -98,31 +113,23 @@
             margin-bottom: 10px;
         }
         
-        a {
-            color: wheat;
+        body {
+            background-image: url('back.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
         
-        table {
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: white;
-        }
-        
-        th,
-        td {
-            padding: 10px;
-            border: 1px solid black;
-            color: black;
-        }
-        
-        h2 {
+        #tableBody {
             color: white;
         }
         
-        th {
-            background-color: lightblue;
+        div {
+            background-color: wheat;
         }
     </style>
+
+    <title>Welcome to Library</title>
 </head>
 
 <body>
@@ -130,7 +137,7 @@
         <img src="lib_logo.jpg" alt="Library Logo" height="45px" width="45px">
         <nav>
             <ul>
-                <li><a href="home.html"><strong>Home</strong></a></li>
+                <li><a href="home.html">Home</strong></a></li>
                 <li><a href="borrow.html"><strong>Borrowing</strong></a></li>
                 <li><a href="returning.html"><strong>Returning</strong></a></li>
                 <li><a href="fine.html"><strong>Fines</strong></a></li>
@@ -138,34 +145,194 @@
             </ul>
         </nav>
     </header>
-    <section>
-        <h2>Library Management System</h2>
-        <table>
-            <tr>
-                <th>Book</th>
-                <th>Book Name</th>
-                <th>Issue Date</th>
-                <th>No of Days</th>
-            </tr>
-            <tr>
-                <td>
-                    <img src="rb3.jpg" alt="BOOK IMAGE" height="170px" width="170px">
-                </td>
-                <td>Let Us C</td>
-                <td>2023-07-06</td>
-                <td>14</td>
-            </tr>
-        </table>
-        <form action="sucess.html" method="GET">
-            <center><input type="submit" value="Confirm"></center>
+
+    <div id="message"></div>
+
+
+    <div class="container my-3">
+        <hr>
+        <form id="libraryForm">
+            <div class="form-group row">
+                <label for="bookName" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="bookName" placeholder="Book Name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Author" class="col-sm-2 col-form-label">Author</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="author" placeholder="Author">
+                </div>
+            </div>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Type</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="type" id="Comics" value="Comics" checked>
+                            <label class="form-check-label" for="Comics">
+                                Comics
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="type" id="Research_Papers" value="Research_Papers">
+                            <label class="form-check-label" for="Research_Papers">
+                                Research Papers
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <input class="form-check-input" type="radio" name="type" id="Novels" value="Novels">
+                            <label class="form-check-label" for="Novels">
+                                Novels
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="type" id="Reference_Book" value="Reference_Book">
+                            <label class="form-check-label" for="Reference_Book">
+                                Reference Book
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <input class="form-check-input" type="radio" name="type" id="General_Knowledge" value="General_Knowledge">
+                            <label class="form-check-label" for="General_Knowledge">
+                                General Knowledge
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <input class="form-check-input" type="radio" name="type" id="Magazine" value="Magazine">
+                            <label class="form-check-label" for="Magazine">
+                                Magazine
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Add Book</button>
+                </div>
+            </div>
         </form>
 
-        <br><br>
-        <a href="home.html">Back to Home Screen</a>
-    </section>
-    <footer>
-        <p>Contact us: 7812 Library vadodara, Gujarat, 393010 | Phone: 756-726-6840 | Email: aaaadarsh007@gamil.com</p>
-    </footer>
+        <div id="table">
+            <h1>Your books</h1>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Type</th>
+                    </tr>
+                </thead>
+                <tbody id='tableBody'></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        console.log("This is index.js");
+
+        function Book(name, author, type) {
+            this.name = name;
+            this.author = author;
+            this.type = type;
+        }
+
+        function Display() {
+
+        }
+
+        Display.prototype.add = function(book) {
+            console.log("Adding to UI");
+            tableBody = document.getElementById('tableBody');
+            let uiString = `<tr>
+                                <td>${book.name}</td>
+                                <td>${book.author}</td>
+                                <td>${book.type}</td>
+                            </tr>`;
+            tableBody.innerHTML += uiString;
+        }
+
+        Display.prototype.clear = function() {
+            let libraryForm = document.getElementById('libraryForm');
+            libraryForm.reset();
+        }
+
+        Display.prototype.validate = function(book) {
+            if (book.name.length < 2 || book.author.length < 2) {
+                return false
+            } else {
+                return true;
+            }
+        }
+        Display.prototype.show = function(type, displayMessage) {
+            let message = document.getElementById('message');
+            message.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                                    <strong>Messge:</strong> ${displayMessage}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>`;
+            setTimeout(function() {
+                message.innerHTML = ''
+            }, 2000);
+
+        }
+        let libraryForm = document.getElementById('libraryForm');
+        libraryForm.addEventListener('submit', libraryFormSubmit);
+
+        function libraryFormSubmit(e) {
+            console.log('YOu have submitted library form');
+            let name = document.getElementById('bookName').value;
+            let author = document.getElementById('author').value;
+            let type;
+            let Comics = document.getElementById('Comics');
+            let Research_Papers = document.getElementById('Research_Papers');
+            let Novels = document.getElementById('Novels');
+
+            let General_Knowledge = document.getElementById('General_Knowledge');
+            let Reference_Books = document.getElementById('Reference_Books');
+            let Magazine = document.getElementById('Magazine');
+
+            if (Comics.checked) {
+                type = Comics.value;
+            } else if (Research_Papers.checked) {
+                type = Research_Papers.value;
+            } else if (Novels.checked) {
+                type = Novels.value;
+            } else if (General_Knowledge.checked) {
+                type = General_Knowledge.value;
+            } else if (Novels.checked) {
+                type = Novels.value;
+            } else if (Reference_Books.checked) {
+                type = Reference_Books.value;
+            } else if (Magazine.checked) {
+                type = Magazine.value;
+            }
+
+            let book = new Book(name, author, type);
+            console.log(book);
+
+            let display = new Display();
+
+            if (display.validate(book)) {
+
+                display.add(book);
+                display.clear();
+                display.show('success', 'Your book has been successfully added')
+            } else {
+                display.show('danger', 'Sorry you cannot add this book');
+            }
+
+            e.preventDefault();
+        }
+    </script>
 </body>
 
 </html>
